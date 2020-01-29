@@ -1,30 +1,34 @@
 import React from 'react';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
-    const ingredientSummary = Object.keys(props.ingredients)
-        .map(igKey => {
-            return (
-                <li key={igKey}>
-                    <span style={{textTransform: 'capitalize'}}>{igKey}</span>: {props.ingredients[igKey]}
-                </li>
-            );
-        });
+class OrderSummary extends React.Component {
 
-    return (
-        <Aux>
-            <h3>Your Order</h3>
-            <p>A delicious burgger with the following ingredients:</p>
-            <ul>
-                {ingredientSummary}
-            </ul>
-            <p><strong>Total Price:</strong> {props.price.toFixed(2)}</p>
-            <p>Continue to Checkout?</p>
-            <Button clicked={props.purchaseCanceled} btnType="Danger">CANSEL</Button>
-            <Button clicked={props.purchaseContinued} btnType="Success">CONTINUE</Button>
-        </Aux>
-    );
+    render() {
+
+        const ingredientSummary = Object.keys(this.props.ingredients)
+            .map(igKey => {
+                return (
+                    <li key={igKey}>
+                        <span style={{textTransform: 'capitalize'}}>{igKey}</span>: {this.props.ingredients[igKey]}
+                    </li>
+                );
+            });
+
+        return (
+            <Aux>
+                <h3>Your Order</h3>
+                <p>A delicious burgger with the following ingredients:</p>
+                <ul>
+                    {ingredientSummary}
+                </ul>
+                <p><strong>Total Price:</strong> {this.props.price.toFixed(2)}</p>
+                <p>Continue to Checkout?</p>
+                <Button clicked={this.props.purchaseCanceled} btnType="Danger">CANSEL</Button>
+                <Button clicked={this.props.purchaseContinued} btnType="Success">CONTINUE</Button>
+            </Aux>
+        );
+    };
 };
 
-export default orderSummary;
+export default OrderSummary;
